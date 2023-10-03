@@ -1,4 +1,4 @@
-package GoFishGameDev;
+package GoFishProject;
 
 public interface Card {
 	 String getRank();
