@@ -2,6 +2,6 @@ package GoFishProject;
 
 public interface Deck {
 	Card drawCard();
-    void shuffleDeck();
-
+    	void shuffleDeck();
+	Boolean isEmpty();
 }
