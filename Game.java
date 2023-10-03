@@ -1,4 +1,4 @@
-package GoFishGameDev;
+package GoFishProject;
 
 public interface Game {
 	void startGame();
