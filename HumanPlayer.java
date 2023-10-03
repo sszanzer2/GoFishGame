@@ -1,4 +1,4 @@
-package GoFishGameDev;
+package GoFishProject;
 import java.util.List;
 
 public class HumanPlayer implements Player {
