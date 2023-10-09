@@ -32,4 +32,13 @@ public class ImplementDeck implements Deck{
     public void shuffleDeck(){
         Collections.shuffle(cards);
     }
+
+    public Boolean isEmpty(){
+        if (cards.size() == 0){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
