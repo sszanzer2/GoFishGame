@@ -15,20 +15,14 @@ public class ImplementGame implements Game{
     public void startGame(){
         System.out.println("Let's begin playing Go Fish!");
 
-        //hand out number cards to each player based on number players
-        if (players.size() == 2 || players.size() == 3) {
-            for (Player player : players) {
-                for (int i = 1; i <=7; i++) {
-                    player.addToHand(deck.drawCard());
-                }
-            }
-        } else if (players.size() > 3) {
-            for (Player player : players) {
-                for (int i = 1; i <=5; i++) {
-                    player.addToHand(deck.drawCard());
-                }
+          //hand out 7 cards to each player
+        for (Player player : players) {
+            for (int i = 1; i <=7; i++) {
+                Card cardToAdd = deck.drawCard(); // Draw a card from the deck. This method also removes it from deck
+                player.addToHand(cardToAdd); // Add the card to the player's hand
             }
         }
+
 
         //start the players turn
         while (!isGameOver()){
