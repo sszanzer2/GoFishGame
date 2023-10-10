@@ -15,7 +15,7 @@ public class ImplementGame implements Game{
     public void startGame(){
         System.out.println("Let's begin playing Go Fish!");
 
-          //hand out 7 cards to each player
+        //hand out 7 cards to each player
         for (Player player : players) {
             for (int i = 1; i <=7; i++) {
                 Card cardToAdd = deck.drawCard(); // Draw a card from the deck. This method also removes it from deck
@@ -23,11 +23,16 @@ public class ImplementGame implements Game{
             }
         }
 
-
         //start the players turn
         while (!isGameOver()){
-            players.get(0).play();
+            for (Player player : players) {
+                if(!isGameOver()){
+                    playTurn(player);
+                    isGameOver();
+                }
+            }
         }
+        endGame();
     }
 
     @Override
@@ -51,6 +56,4 @@ public class ImplementGame implements Game{
     public void endGame(){
 
     }
-
-
 }
