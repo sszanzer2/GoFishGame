@@ -27,7 +27,39 @@ public class HumanPlayer implements Player {
 
     @Override
     public void play() {
-        // Implement the player's behavior here
-        // This method is left empty for you to define the player's actions in the game
+        if (hand.isEmpty()) {
+            System.out.println(getName() + ", you have no cards to play.");
+            return;
+        }
+
+        Scanner scanner = new Scanner(System.in);
+
+        // Print the player's hand
+        System.out.println(getName() + ", your current hand:");
+        for (int i = 0; i < hand.size(); i++) {
+            System.out.println((i + 1) + ". " + hand.get(i));
+        }
+        
+        System.out.print("Enter the number of the card you want to play (1-" + hand.size() + "): ");
+        int selectedCardIndex = scanner.nextInt() - 1;
+
+        if (selectedCardIndex < 0 || selectedCardIndex >= hand.size()) {
+            System.out.println("Invalid card selection. Please select a valid card.");
+            return;
+        }
+
+        Card cardToPlay = hand.get(selectedCardIndex);
+        
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the rank you want to ask for: ");
+        String rank = System.in;
+        
+        System.out.println(getName() + " asks for " + rank);
+        
+     // Implement the logic to ask for a rank from the other player and handle the response
+     // You need to define the logic to check if the other player has the requested rank,
+     // and if they do, take those cards and add them to your hand.
+     // You also need to handle the case where the other player says "Go Fish" and you draw a card.
+
     }
 }
