@@ -55,10 +55,20 @@ public class GoFishGame implements Game {
     @Override
     public void playTurn(Player player) {
         // Implement the game logic for playing a turn here
+
+        //draw a card for the player and add it to their hand
+        Card newCard = deck.drawCard();
+        player.addToHand(newCard);
+
+        player.play();
+        
     }
 
     @Override
     public void endGame() {
         // Implement game-ending actions here
+        System.out.println("Game Over!");
+
+        //determine the winner by checking who has more sets
     }
 }
