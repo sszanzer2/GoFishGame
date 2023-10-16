@@ -4,6 +4,7 @@ import java.util.List;
 public class HumanPlayer implements Player {
     private String name;
     private List<Card> hand;
+    private ArrayList<Card> sets;
 
     public HumanPlayer(String name, List<Card> hand) {
         this.name = name;
@@ -55,6 +56,25 @@ public class HumanPlayer implements Player {
         String rank = System.in;
         
         System.out.println(getName() + " asks for " + rank);
+
+         if (ComputerPlayer.hasCard(rank)) {
+            // Transfer cards from the opponent to the current player
+            List<Card> cards = ComputerPlayer.getCardsByRank(rank);
+            hand.add(cards);
+            ComputerPlayer.removeCards(cards);
+
+            // Check for sets and remove them from the hand
+            checkForSets();
+        } else {
+            System.out.println(ComputerPlayer.getName() + " says 'Go Fish.'");
+            // Draw a card from the deck
+            Card drawnCard = deck.drawCard();
+            hand.add(drawnCard);
+
+            // Check if the drawn card makes a set
+            checkForSets();
+        }
+        
         
      // Implement the logic to ask for a rank from the other player and handle the response
      // You need to define the logic to check if the other player has the requested rank,
@@ -62,4 +82,8 @@ public class HumanPlayer implements Player {
      // You also need to handle the case where the other player says "Go Fish" and you draw a card.
 
     }
+
+     public void checkForSets() {
+         //logic to check if they got a set
+     }
 }
