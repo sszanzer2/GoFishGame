@@ -27,7 +27,19 @@ public class ComputerPlayer implements Player {
 
     @Override
     public void play() {
-        // Implement the player's behavior here
-        // This method is left empty for you to define the player's actions in the game
+        //checking to see if the computer's hand is empty
+        if (hand.isEmpty()) {
+            System.out.println(getName() + " has no cards left to play.");
+            return;
+        }
+    	
+    	// Choosing a random card to ask for from the computer's hand 
+        Random random = new Random();
+        int index = random.nextInt(hand.size());
+        Card cardToPlay = hand.get(index).getRank();;
+        
+        
+        System.out.println(getName() + " asks for a " + cardToPlay);
+
     }
 }

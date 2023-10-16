@@ -4,6 +4,7 @@ import java.util.List;
 public class HumanPlayer implements Player {
     private String name;
     private List<Card> hand;
+    private ArrayList<Card> sets;
 
     public HumanPlayer(String name, List<Card> hand) {
         this.name = name;
@@ -27,7 +28,62 @@ public class HumanPlayer implements Player {
 
     @Override
     public void play() {
-        // Implement the player's behavior here
-        // This method is left empty for you to define the player's actions in the game
+        if (hand.isEmpty()) {
+            System.out.println(getName() + ", you have no cards to play.");
+            return;
+        }
+
+        Scanner scanner = new Scanner(System.in);
+
+        // Print the player's hand
+        System.out.println(getName() + ", your current hand:");
+        for (int i = 0; i < hand.size(); i++) {
+            System.out.println((i + 1) + ". " + hand.get(i));
+        }
+        
+        System.out.print("Enter the number of the card you want to play (1-" + hand.size() + "): ");
+        int selectedCardIndex = scanner.nextInt() - 1;
+
+        if (selectedCardIndex < 0 || selectedCardIndex >= hand.size()) {
+            System.out.println("Invalid card selection. Please select a valid card.");
+            return;
+        }
+
+        Card cardToPlay = hand.get(selectedCardIndex);
+        
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the rank you want to ask for: ");
+        String rank = System.in;
+        
+        System.out.println(getName() + " asks for " + rank);
+
+         if (ComputerPlayer.hasCard(rank)) {
+            // Transfer cards from the opponent to the current player
+            List<Card> cards = ComputerPlayer.getCardsByRank(rank);
+            hand.add(cards);
+            ComputerPlayer.removeCards(cards);
+
+            // Check for sets and remove them from the hand
+            checkForSets();
+        } else {
+            System.out.println(ComputerPlayer.getName() + " says 'Go Fish.'");
+            // Draw a card from the deck
+            Card drawnCard = deck.drawCard();
+            hand.add(drawnCard);
+
+            // Check if the drawn card makes a set
+            checkForSets();
+        }
+        
+        
+     // Implement the logic to ask for a rank from the other player and handle the response
+     // You need to define the logic to check if the other player has the requested rank,
+     // and if they do, take those cards and add them to your hand.
+     // You also need to handle the case where the other player says "Go Fish" and you draw a card.
+
     }
+
+     public void checkForSets() {
+         //logic to check if they got a set
+     }
 }
