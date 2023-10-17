@@ -1,19 +1,28 @@
 package GoFishProject;
 import java.util.List;
+import java.util.Scanner;
 
 public class HumanPlayer implements Player {
     private String name;
     private List<Card> hand;
-    private ArrayList<Card> sets;
+    private int hSetCounter;
+    
+    
+    Scanner scanner = new Scanner(System.in);
 
     public HumanPlayer(String name, List<Card> hand) {
         this.name = name;
         this.hand = hand;
+        hSetCounter = 0;
     }
+    
 
     @Override
     public String getName() {
         return name;
+    }
+    public int gethSetCounter() {
+    	return hSetCounter;
     }
 
     @Override
@@ -33,8 +42,6 @@ public class HumanPlayer implements Player {
             return;
         }
 
-        Scanner scanner = new Scanner(System.in);
-
         // Print the player's hand
         System.out.println(getName() + ", your current hand:");
         for (int i = 0; i < hand.size(); i++) {
@@ -51,17 +58,17 @@ public class HumanPlayer implements Player {
 
         Card cardToPlay = hand.get(selectedCardIndex);
         
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter the rank you want to ask for: ");
-        String rank = System.in;
-        
-        System.out.println(getName() + " asks for " + rank);
+       
+      
+        System.out.println(getName() + " asks for " + cardToPlay);
 
-         if (ComputerPlayer.hasCard(rank)) {
+         if (ComputerPlayer.hand.contains(cardToPlay)) {
             // Transfer cards from the opponent to the current player
-            List<Card> cards = ComputerPlayer.getCardsByRank(rank);
-            hand.add(cards);
-            ComputerPlayer.removeCards(cards);
+            List<Card> cards = ComputerPlayer.getCardsByRank(cardToPlay);
+            ComputerPlayer.hand.addAll(cardToPlay);
+            HumanPlayer.hand.removeAll(cardToPlay)
+            
+            
 
             // Check for sets and remove them from the hand
             checkForSets();
@@ -84,6 +91,9 @@ public class HumanPlayer implements Player {
     }
 
      public void checkForSets() {
-         //logic to check if they got a set
+         hand.sort();
+         for(int i =0; i< hand.size(); i++) {
+        	 if()
+         }
      }
 }

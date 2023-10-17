@@ -1,11 +1,12 @@
 package GoFishProject;
-import java.util.List;
+import java.util.ArrayList;
+
 
 public class GoFishGame implements Game {
-    private List<Player> players;
+    private ArrayList<Player> players;
     private Deck deck;
 
-    public GoFishGame(List<Player> players, Deck deck) {
+    public GoFishGame(ArrayList<Player> players, Deck deck) {
         this.players = players;
         this.deck = deck;
     }

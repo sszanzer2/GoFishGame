@@ -1,5 +1,6 @@
 package GoFishProject;
 import java.util.List;
+import java.util.Random;
 
 public class ComputerPlayer implements Player {
     private String name;
@@ -36,7 +37,7 @@ public class ComputerPlayer implements Player {
     	// Choosing a random card to ask for from the computer's hand 
         Random random = new Random();
         int index = random.nextInt(hand.size());
-        Card cardToPlay = hand.get(index).getRank();;
+        Card cardToPlay = hand.get(index);
         
         
         System.out.println(getName() + " asks for a " + cardToPlay);

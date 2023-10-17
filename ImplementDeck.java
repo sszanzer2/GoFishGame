@@ -15,7 +15,7 @@ public class ImplementDeck implements Deck{
 
         for (String suit : suits) {
             for (String rank : ranks){
-                cards.add(new ImplementCard(rank, suit));
+            	cards.add(new ImplementCard(rank, suit));
             }
         }
     }
