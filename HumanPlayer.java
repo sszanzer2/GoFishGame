@@ -66,36 +66,33 @@ public class HumanPlayer implements Player {
         
         return cardToPlay;
         
-      
-        
-        
-     // Implement the logic to ask for a rank from the other player and handle the response
-     // You need to define the logic to check if the other player has the requested rank,
-     // and if they do, take those cards and add them to your hand.
-     // You also need to handle the case where the other player says "Go Fish" and you draw a card.
-
     }
 
-     public int checkForSets() {
-    	 int counter = 0;
-    	 int set = 0;
-         for(int i = 0; i< hand.size(); i++) {
-        	 if(hand.get(i) == hand.get(i+1)) {
-        		 counter++; 
-        	 }
-        	 
-        	 if(counter == 4) {
-            	 set++;
-        		 
-        	 }
-         }
-         
-         if (set > 0) {
-        	 return set;
-         }
-         else {
-        	 return -1;
-         }
-         
+    public int checkForSets() {
+        int set = 0;
+        for (int i = 0; i < hand.size(); i++) {
+            int count = 1;
+            for (int j = i + 1; j < hand.size(); j++) {
+                if (hand.get(i).equals(hand.get(j))) {
+                    count++;
+                    if (count == 4) {
+                        set++;
+                        // Remove the set of cards from the hand
+                        for (int k = j; k >= i; k--) {
+                            hand.remove(k);
+                        }
+                        i = i - 1; // Adjust the outer loop index
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (set > 0) {
+            return set;
+        } else {
+            return -1;
+        }
+    }
+
      }
-}

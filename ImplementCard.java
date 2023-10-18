@@ -1,5 +1,5 @@
 package GoFishProject;
-public abstract class ImplementCard implements Card {
+public class ImplementCard implements Card {
     private String suit;
     private String rank;
 
