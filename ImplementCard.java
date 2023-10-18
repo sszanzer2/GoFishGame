@@ -18,7 +18,7 @@ public class ImplementCard implements Card {
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append(rank + " of " + suit);
+        sb.append(rank);
         return sb.toString();
     }
 

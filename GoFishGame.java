@@ -78,8 +78,9 @@ public class GoFishGame implements Game {
 
         if (opponent.getHand().contains(card)) {
             // Transfer cards from the opponent to the current player
+        	player.addToHand(card);
             opponent.removeFromHand(card);
-            player.addToHand(card);
+           
 
             // Check for sets and remove them from the hand
             int sets = player.checkForSets();
@@ -87,7 +88,7 @@ public class GoFishGame implements Game {
                 System.out.println(player.getName() + " has " + sets + " set(s)");
             }
         } else {
-            System.out.println(player.getName() + " says 'Go Fish.'");
+            System.out.println(opponent.getName() + " says 'Go Fish.'");
             // Draw a card from the deck
             Card drawnCard = deck.drawCard();
             player.addToHand(drawnCard);
