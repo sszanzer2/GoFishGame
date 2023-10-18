@@ -9,23 +9,26 @@ public class Main {
 		Scanner scanner = new Scanner(System.in);
 		
 		System.out.println("Please enter your name: ");
-		String hname = scanner.nextLine();
-		String cname = "Computer";
+		Player hname = System.in();
+		Player cname = "Computer";
 		
 		players.add(hname);
 		players.add(cname);
 		
-		ImplementCard card = new ImplementCard(rank, suit);
+		
 		ImplementDeck deck = new ImplementDeck();
-		
-		GoFishGame game = new GoFishGame(players, deck);
-		
+			
 		HumanPlayer hPlayer = new HumanPlayer(hname, hand);
 		ComputerPlayer cPlayer = new ComputerPlayer(cname, hand);
 		
-		
-		
+	}	
 
 	}
-
 }
+	
+	public static void playGame(ArrayList<Player> players, deck) {
+		GoFishGame game = new GoFishGame(players, deck);
+		game.playTurn(cPlayer);
+	}
+
+

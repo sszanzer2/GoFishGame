@@ -34,12 +34,16 @@ public class HumanPlayer implements Player {
     public void addToHand(Card card) {
         hand.add(card);
     }
+    
+    public void removeFromHand(Card card) {
+    	hand.remove(card);
+    }
 
     @Override
-    public void play() {
+    public Card play() {
         if (hand.isEmpty()) {
             System.out.println(getName() + ", you have no cards to play.");
-            return;
+            
         }
 
         // Print the player's hand
@@ -53,34 +57,16 @@ public class HumanPlayer implements Player {
 
         if (selectedCardIndex < 0 || selectedCardIndex >= hand.size()) {
             System.out.println("Invalid card selection. Please select a valid card.");
-            return;
+           
         }
 
         Card cardToPlay = hand.get(selectedCardIndex);
         
-       
-      
         System.out.println(getName() + " asks for " + cardToPlay);
-
-         if (ComputerPlayer.hand.contains(cardToPlay)) {
-            // Transfer cards from the opponent to the current player
-            List<Card> cards = ComputerPlayer.getCardsByRank(cardToPlay);
-            ComputerPlayer.hand.addAll(cardToPlay);
-            HumanPlayer.hand.removeAll(cardToPlay)
-            
-            
-
-            // Check for sets and remove them from the hand
-            checkForSets();
-        } else {
-            System.out.println(ComputerPlayer.getName() + " says 'Go Fish.'");
-            // Draw a card from the deck
-            Card drawnCard = deck.drawCard();
-            hand.add(drawnCard);
-
-            // Check if the drawn card makes a set
-            checkForSets();
-        }
+        
+        return cardToPlay;
+        
+      
         
         
      // Implement the logic to ask for a rank from the other player and handle the response
@@ -90,10 +76,26 @@ public class HumanPlayer implements Player {
 
     }
 
-     public void checkForSets() {
-         hand.sort();
-         for(int i =0; i< hand.size(); i++) {
-        	 if()
+     public int checkForSets() {
+    	 int counter = 0;
+    	 int set = 0;
+         for(int i = 0; i< hand.size(); i++) {
+        	 if(hand.get(i) == hand.get(i+1)) {
+        		 counter++; 
+        	 }
+        	 
+        	 if(counter == 4) {
+            	 set++;
+        		 
+        	 }
          }
+         
+         if (set > 0) {
+        	 return set;
+         }
+         else {
+        	 return -1;
+         }
+         
      }
 }

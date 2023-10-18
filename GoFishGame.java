@@ -1,5 +1,6 @@
 package GoFishProject;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class GoFishGame implements Game {
@@ -56,12 +57,39 @@ public class GoFishGame implements Game {
     @Override
     public void playTurn(Player player) {
         // Implement the game logic for playing a turn here
-
+    	Player opponent = new Player();
         //draw a card for the player and add it to their hand
         Card newCard = deck.drawCard();
         player.addToHand(newCard);
 
-        player.play();
+        Card card = player.play();
+        
+
+        if (opponent.getHand().contains(card)) {
+           // Transfer cards from the opponent to the current player
+           //List<Card> cards = opponent.getHand(card);
+           player.addToHand(card);
+           opponent.removeFromHand(card);
+           
+           // Check for sets and remove them from the hand
+           //checkForSets();
+       } else {
+           System.out.println(player.getName() + " says 'Go Fish.'");
+           // Draw a card from the deck
+           Card drawnCard = deck.drawCard();
+           player.getHand().add(drawnCard);
+
+           // Check if the drawn card makes a set
+           int answer = player.checkForSets();
+           
+           if(answer > 0) {
+        	   System.out.println(player.getName() + " has " + answer + " set(s)");
+           }else {
+        	   System.out.println("No sets");
+           }
+           
+       }
+       
         
     }
 
