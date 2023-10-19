@@ -26,7 +26,7 @@ public class ComputerPlayer implements Player {
         hand.add(card);
     }
     public void removeFromHand(Card card) {
-    	hand.remove(card);
+        hand.remove(card);
     }
 
     @Override
@@ -34,48 +34,53 @@ public class ComputerPlayer implements Player {
         //checking to see if the computer's hand is empty
         if (hand.isEmpty()) {
             System.out.println(getName() + " has no cards left to play.");
-            
+
         }
-    	
-    	// Choosing a random card to ask for from the computer's hand 
+        // Print the player's hand FOR DEBUGGING PURPOSES ONLY
+        System.out.println(getName() + ", your current hand:");
+        for (int i = 0; i < hand.size(); i++) {
+            System.out.println((i + 1) + ". " + hand.get(i));
+        }
+
+        // Choosing a random card to ask for from the computer's hand
         Random random = new Random();
         int index = random.nextInt(hand.size());
         Card cardToPlay = hand.get(index);
-        
-        
+
+
         System.out.println(getName() + " asks for a " + cardToPlay);
-        
+
         return cardToPlay;
 
     }
 
-	@Override
-	public int checkForSets() {
-		    int set = 0;
-		    for (int i = 0; i < hand.size(); i++) {
-		        int count = 1;
-		        for (int j = i + 1; j < hand.size(); j++) {
-		            if (hand.get(i).equals(hand.get(j))) {
-		                count++;
-		                if (count == 4) {
-		                    set++;
-		                    // Remove the set of cards from the hand
-		                    for (int k = j; k >= i; k--) {
-		                        hand.remove(k);
-		                    }
-		                    i = i - 1; // Adjust the outer loop index
-		                    break;
-		                }
-		            }
-		        }
-		    }
+    @Override
+    public int checkForSets() {
+        int set = 0;
+        for (int i = 0; i < hand.size(); i++) {
+            int count = 1;
+            for (int j = i + 1; j < hand.size(); j++) {
+                if (hand.get(i).equals(hand.get(j))) {
+                    count++;
+                    if (count == 4) {
+                        set++;
+                        // Remove the set of cards from the hand
+                        for (int k = j; k >= i; k--) {
+                            hand.remove(k);
+                        }
+                        i = i - 1; // Adjust the outer loop index
+                        break;
+                    }
+                }
+            }
+        }
 
-		    if (set > 0) {
-		        return set;
-		    } else {
-		        return -1;
-		    }
-		
+        if (set > 0) {
+            return set;
+        } else {
+            return -1;
+        }
 
-	}
+
+    }
 }
