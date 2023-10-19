@@ -13,7 +13,7 @@ public class Main {
         List<Card> humanHand = new ArrayList<>();
         List<Card> computerHand = new ArrayList<>();
         
-        Player humanPlayer = new HumanPlayer("Human", humanHand);
+        Player humanPlayer = new HumanPlayer("Player", humanHand);
         Player computerPlayer = new ComputerPlayer("Computer", computerHand);
         
         players.add(humanPlayer);
