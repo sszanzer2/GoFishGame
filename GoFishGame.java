@@ -1,4 +1,5 @@
 package GoFishProject;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -70,38 +71,45 @@ public class GoFishGame implements Game {
 
         Player opponent = findOpponent(player);
 
-        // Draw a card for the player and add it to their hand
+        /* Draw a card for the player and add it to their hand
         Card newCard = deck.drawCard();
-        player.addToHand(newCard);
+        player.addToHand(newCard); */
 
         Card card = player.play();
 
-        if (opponent.getHand().contains(card)) {
-            // Transfer cards from the opponent to the current player
-        	player.addToHand(card);
-            opponent.removeFromHand(card);
-           
+        //variable to store the card rank searching for
+        String cardRank = card.getRank();
 
-            // Check for sets and remove them from the hand
-            int sets = player.checkForSets();
-            if (sets > 0) {
-                System.out.println(player.getName() + " has " + sets + " set(s)");
+        // Create a list to store cards to remove from opponent's hand
+        List<Card> cardsToRemove = new ArrayList<>();
+
+        // Iterate through the opponent's hand to check if any card has the same rank
+        for (Card opponentCard : opponent.getHand()) {
+            if (opponentCard.getRank().equals(cardRank)) {
+                cardsToRemove.add(opponentCard); // Add matching rank cards to the list
+            }
+        }
+
+        if (!cardsToRemove.isEmpty()) {
+            // Transfer the cards from the opponent to the current player
+            for (Card cardToRemove : cardsToRemove) {
+                player.addToHand(cardToRemove);
+                opponent.removeFromHand(cardToRemove);
             }
         } else {
-        	//auto says go fish
+            //auto says go fish
             System.out.println(opponent.getName() + " says 'Go Fish.'");
             // Draw a card from the deck
             Card drawnCard = deck.drawCard();
             //for some reason it adds 2 cards
             player.addToHand(drawnCard);
-
-            // Check if the drawn card makes a set
-            int sets = player.checkForSets();
-            if (sets > 0) {
-                System.out.println(player.getName() + " has " + sets + " set(s)");
-            } else {
-                System.out.println("No sets");
-            }
+        }
+        // Check if the drawn card makes a set
+        int sets = player.checkForSets();
+        if (sets > 0) {
+            System.out.println(player.getName() + " has " + sets + " set(s)");
+        } else {
+            System.out.println("No sets");
         }
     }
 
