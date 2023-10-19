@@ -88,9 +88,11 @@ public class GoFishGame implements Game {
                 System.out.println(player.getName() + " has " + sets + " set(s)");
             }
         } else {
+        	//auto says go fish
             System.out.println(opponent.getName() + " says 'Go Fish.'");
             // Draw a card from the deck
             Card drawnCard = deck.drawCard();
+            //for some reason it adds 2 cards
             player.addToHand(drawnCard);
 
             // Check if the drawn card makes a set
