@@ -90,6 +90,7 @@ public class GoFishGame implements Game {
         }
 
         if (!cardsToRemove.isEmpty()) {
+        	System.out.println(opponent.getName() + " has a " + card + "!");
             // Transfer the cards from the opponent to the current player
             for (Card cardToRemove : cardsToRemove) {
                 player.addToHand(cardToRemove);
@@ -102,6 +103,7 @@ public class GoFishGame implements Game {
             Card drawnCard = deck.drawCard();
             //for some reason it adds 2 cards
             player.addToHand(drawnCard);
+           
         }
         // Check if the drawn card makes a set
         int sets = player.checkForSets();
