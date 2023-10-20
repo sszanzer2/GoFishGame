@@ -5,10 +5,12 @@ import java.util.Random;
 public class ComputerPlayer implements Player {
     private String name;
     private List<Card> hand;
+    private int sets = 0;
 
-    public ComputerPlayer(String name, List<Card> hand) {
+    public ComputerPlayer(String name, List<Card> hand, int sets) {
         this.name = name;
         this.hand = hand;
+        this.sets = sets;
     }
 
     @Override
@@ -27,6 +29,16 @@ public class ComputerPlayer implements Player {
     }
     public void removeFromHand(Card card) {
         hand.remove(card);
+    }
+
+    @Override
+    public int getSets(){
+        return this.sets;
+    }
+
+    @Override
+    public void setSets(int sets){
+        this.sets += sets;
     }
 
     @Override
@@ -51,36 +63,32 @@ public class ComputerPlayer implements Player {
         System.out.println(getName() + " asks for a " + cardToPlay);
 
         return cardToPlay;
-
     }
 
     @Override
     public int checkForSets() {
-        int set = 0;
-        for (int i = 0; i < hand.size(); i++) {
-            int count = 1;
-            for (int j = i + 1; j < hand.size(); j++) {
-                if (hand.get(i).equals(hand.get(j))) {
+        int sets = 0;
+        int i = 0;
+        while (i < hand.size()) {
+            Card card = hand.get(i);
+            int count = 0;
+            for (int j = 0; j < hand.size(); j++) {
+                if (hand.get(j).getRank().equals(card.getRank())) {
                     count++;
-                    if (count == 4) {
-                        set++;
-                        // Remove the set of cards from the hand
-                        for (int k = j; k >= i; k--) {
-                            hand.remove(k);
-                        }
-                        i = i - 1; // Adjust the outer loop index
-                        break;
-                    }
                 }
             }
+            if (count == 4) {
+                // Remove the set of cards from the hand
+                for (int j = hand.size() - 1; j >= 0; j--) {
+                    if (hand.get(j).getRank().equals(card.getRank())) {
+                        hand.remove(j);
+                    }
+                }
+                sets++;
+            } else {
+                i++;
+            }
         }
-
-        if (set > 0) {
-            return set;
-        } else {
-            return -1;
-        }
-
-
+        return sets;
     }
 }

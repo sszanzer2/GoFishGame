@@ -6,14 +6,16 @@ public class HumanPlayer implements Player {
     private String name;
     private List<Card> hand;
     private int hSetCounter;
+    private int sets = 0;
 
 
     Scanner scanner = new Scanner(System.in);
 
-    public HumanPlayer(String name, List<Card> hand) {
+    public HumanPlayer(String name, List<Card> hand, int sets) {
         this.name = name;
         this.hand = hand;
         hSetCounter = 0;
+        this.sets = sets;
     }
 
 
@@ -28,6 +30,16 @@ public class HumanPlayer implements Player {
     @Override
     public List<Card> getHand() {
         return hand;
+    }
+
+    @Override
+    public int getSets(){
+        return this.sets;
+    }
+
+    @Override
+    public void setSets(int sets){
+        this.sets += sets;
     }
 
     @Override
@@ -93,6 +105,8 @@ public class HumanPlayer implements Player {
         } else {
             return -1;
         } */
+
+        /*
         int set = 0;
         int i = 0; // Use a separate variable for the outer loop index
         while (i < hand.size()) {
@@ -112,7 +126,30 @@ public class HumanPlayer implements Player {
             }
             i++; // Move to the next card in the hand
         }
-        return set;
+        return set; */
+        int sets = 0;
+        int i = 0;
+        while (i < hand.size()) {
+            Card card = hand.get(i);
+            int count = 0;
+            for (int j = 0; j < hand.size(); j++) {
+                if (hand.get(j).getRank().equals(card.getRank())) {
+                    count++;
+                }
+            }
+            if (count == 4) {
+                // Remove the set of cards from the hand
+                for (int j = hand.size() - 1; j >= 0; j--) {
+                    if (hand.get(j).getRank().equals(card.getRank())) {
+                        hand.remove(j);
+                    }
+                }
+                sets++;
+            } else {
+                i++;
+            }
+        }
+        return sets;
     }
 
 }

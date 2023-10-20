@@ -14,8 +14,11 @@ public class GoFishGame implements Game {
 
     @Override
     public void startGame() {
+        Scanner scanner = new Scanner(System.in);
+
         // Implement the game initialization here
-        System.out.println("Let's begin playing Go Fish!");
+        System.out.println("Let's begin playing Go Fish!\n");
+        //scanner.nextLine(); // This line will wait until the Enter key is pressed.
 
         // Shuffle the deck
         deck.shuffleDeck();
@@ -71,10 +74,6 @@ public class GoFishGame implements Game {
 
         Player opponent = findOpponent(player);
 
-        /* Draw a card for the player and add it to their hand
-        Card newCard = deck.drawCard();
-        player.addToHand(newCard); */
-
         Card card = player.play();
 
         //variable to store the card rank searching for
@@ -106,11 +105,10 @@ public class GoFishGame implements Game {
         }
         // Check if the drawn card makes a set
         int sets = player.checkForSets();
-        if (sets > 0) {
-            System.out.println(player.getName() + " has " + sets + " set(s)");
-        } else {
-            System.out.println("No sets");
-        }
+        player.setSets(sets);
+
+
+        System.out.println(player.getName() + " has " + player.getSets() + " set(s)");
     }
 
     @Override
@@ -140,20 +138,23 @@ public class GoFishGame implements Game {
     private Player determineWinner() {
         Player winner = null;
         int maxSets = -1;
+        boolean tie = false;
 
         for (Player player : players) {
-            int sets = player.checkForSets();
+            System.out.println(player.getName() + " has " + player.getSets() + " sets."); // Debugging
+            int sets = player.getSets();
             if (sets > maxSets) {
-                maxSets = sets;
+                maxSets = player.getSets();
                 winner = player;
+            } else if (sets == maxSets) {
+                tie = true;
             }
         }
 
         // If there's a tie, return null
-        if (maxSets == 0) {
+        if (tie) {
             winner = null;
         }
-
         return winner;
     }
 }
