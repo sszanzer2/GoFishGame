@@ -90,7 +90,7 @@ public class GoFishGame implements Game {
         }
 
         if (!cardsToRemove.isEmpty()) {
-        	System.out.println(opponent.getName() + " has a " + card + "!");
+        	System.out.println("\n" + opponent.getName() + " has a " + card + "!\n");
             // Transfer the cards from the opponent to the current player
             for (Card cardToRemove : cardsToRemove) {
                 player.addToHand(cardToRemove);
@@ -98,7 +98,7 @@ public class GoFishGame implements Game {
             }
         } else {
             //auto says go fish
-            System.out.println(opponent.getName() + " says 'Go Fish.'");
+            System.out.println(opponent.getName() + " says 'Go Fish.'\n");
             // Draw a card from the deck
             Card drawnCard = deck.drawCard();
             //for some reason it adds 2 cards
@@ -116,7 +116,7 @@ public class GoFishGame implements Game {
     @Override
     public void endGame() {
         // Implement game-ending actions here
-        System.out.println("Game Over!");
+        System.out.println("\nGame Over!");
 
         // Determine the winner by checking who has more sets
         Player winner = determineWinner();

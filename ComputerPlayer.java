@@ -48,11 +48,11 @@ public class ComputerPlayer implements Player {
             System.out.println(getName() + " has no cards left to play.");
 
         }
-        // Print the player's hand FOR DEBUGGING PURPOSES ONLY
+        /* Print the player's hand FOR DEBUGGING PURPOSES ONLY
         System.out.println(getName() + ", your current hand:");
         for (int i = 0; i < hand.size(); i++) {
             System.out.println((i + 1) + ". " + hand.get(i));
-        }
+        } */
 
         // Choosing a random card to ask for from the computer's hand
         Random random = new Random();
