@@ -66,9 +66,12 @@ public class HumanPlayer implements Player {
 
         System.out.print("Enter the number of the card you want to play (1-" + hand.size() + "): ");
         int selectedCardIndex = scanner.nextInt() - 1;
-
+        
+       
         if (selectedCardIndex < 0 || selectedCardIndex >= hand.size()) {
             System.out.println("Invalid card selection. Please select a valid card.");
+            System.out.print("Enter the number of the card you want to play (1-" + hand.size() + "): ");
+            selectedCardIndex = scanner.nextInt() - 1;
 
         }
 

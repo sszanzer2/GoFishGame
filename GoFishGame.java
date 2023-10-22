@@ -103,7 +103,10 @@ public class GoFishGame implements Game {
             Card drawnCard = deck.drawCard();
             //for some reason it adds 2 cards
             player.addToHand(drawnCard);
-           
+            if(drawnCard == card) {
+            	System.out.println(player.getName() + " picked their wish! ");
+            }
+          
         }
         // Check if the drawn card makes a set
         int sets = player.checkForSets();
