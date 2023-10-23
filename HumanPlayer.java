@@ -68,7 +68,7 @@ public class HumanPlayer implements Player {
         int selectedCardIndex = scanner.nextInt() - 1;
         
        
-        if (selectedCardIndex < 0 || selectedCardIndex >= hand.size()) {
+        while (selectedCardIndex < 0 || selectedCardIndex >= hand.size()) {
             System.out.println("Invalid card selection. Please select a valid card.");
             System.out.print("Enter the number of the card you want to play (1-" + hand.size() + "): ");
             selectedCardIndex = scanner.nextInt() - 1;
@@ -84,52 +84,6 @@ public class HumanPlayer implements Player {
     }
 
     public int checkForSets() {
-        /*int set = 0;
-        for (int i = 0; i < hand.size(); i++) {
-            int count = 1;
-            for (int j = i + 1; j < hand.size(); j++) {
-                if (hand.get(i).equals(hand.get(j))) {
-                    count++;
-                    if (count == 4) {
-                        set++;
-                        // Remove the set of cards from the hand
-                        for (int k = j; k >= i; k--) {
-                            hand.remove(k);
-                        }
-                        i = i - 1; // Adjust the outer loop index
-                        break;
-                    }
-                }
-            }
-        }
-
-        if (set > 0) {
-            return set;
-        } else {
-            return -1;
-        } */
-
-        /*
-        int set = 0;
-        int i = 0; // Use a separate variable for the outer loop index
-        while (i < hand.size()) {
-            int count = 1;
-            for (int j = i + 1; j < hand.size(); j++) {
-                if (hand.get(i).equals(hand.get(j))) {
-                    count++;
-                    if (count == 4) {
-                        set++;
-                        // Remove the set of cards from the hand
-                        for (int k = j; k >= i; k--) {
-                            hand.remove(k);
-                        }
-                        break; // No need to adjust i here
-                    }
-                }
-            }
-            i++; // Move to the next card in the hand
-        }
-        return set; */
         int sets = 0;
         int i = 0;
         while (i < hand.size()) {
